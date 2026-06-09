@@ -76,9 +76,40 @@ class Player:
         elif self.pot > 1:
             console.print(f"   Manatränke:              {self.pot} Tränke", style="magenta")
 
-        time.sleep(0.2)
-        print("")
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    def healing(self):
+        if self.heal > 0:
+            self.hp += 10
+            self.statchk()
+            self.heal -= 1
+            console.print(f"{self.name} spürt, wie dessen Wunden heilen")
+            console.print(f"+ 10hp", style = "green")
+            return self.hp, self.heal
+        else:
+            print("Du hast keine Heiltränke mehr!")
+            return self.hp
+
+    def use_item(self):
+            ongoing = True
+            while ongoing:
+                console.print(f"+------------------------------------+")
+                console.print(f"|   Wähle das zunutzende Item:       |")
+                console.print(f"|       Heiltrank:      {self.heal}  |")
+                console.print(f"|       Ausdauertrank:  {self.pwr}   |")
+                console.print(f"|       Manatranktrank: {self.heal}  |")
+                console.print(f"+------------------------------------+")
+                item = input(f"{self.name} trinkt einen... : ")
+                if item == "":
+                    console.print("Wie bitte?", style = "red")
+                if item.lower() == "heiltrank":
+                    self.healing()
+                    ongoing = False
+                    return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
+                else:
+                    console.print("Wie bitte?", style="red")
+
+    time.sleep(0.2)
+    print("")
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
     # Methode zum Ausruhen (Nur einmal pro Zug einsetzbar)
     def rest(self):
@@ -93,15 +124,6 @@ class Player:
         console.print("+ 10sp", style = "green")
         time.sleep(0.2)
         console.print("+ 1ma", style="green")
-
-    def heal(self):
-        if self.heal > 0:
-            self.hp += 10
-            self.statchk()
-            return self.hp
-        else:
-            print("Du hast keine Heiltränke mehr!")
-            return self.hp
 
     # Gegnerklasse
 class Enemy:
@@ -122,6 +144,7 @@ class Enemy:
         console.print(f"   Schaden:    {self.endam} Schaden")
         print("")
         print("~~~~~~~~~~~~~~")
+
 
 # Funktion zur Charakterwahl
 def character():
@@ -237,6 +260,7 @@ def fighting1(pl):
                             Wie wehrst du dich?
                                 - {pl.wpn} (Phy) - 5sp
                                 - {pl.mag} (Mag) - 5ma
+                                - item
                             """
             chc = Markdown(CHOICE)
             print("~~~~~~~~~~~~~~")
@@ -259,6 +283,8 @@ def fighting1(pl):
                 console.print(f"Du hast {pl.magdam} Schaden gemacht!", style="green")
                 print("")
                 reacted = 1
+            elif answer.lower() == "item":
+                pl.use_item()
             else:
                 print("Tipp: Siehe Inhalt Klammern")
 
