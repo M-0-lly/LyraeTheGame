@@ -379,12 +379,7 @@ def action1(pl):
             choi = input()
             print("")
             if choi.lower() == "weiter":
-                act = 1
-                rando = random.randint(1, 3)
-                if rando == 1 or 2:
-                    fighting1(pl)
-                elif rando == 3:
-                    wanderer(pl)
+                fighting1(pl)
             elif choi.lower() == "stats":
                 pl.stats()
             elif choi.lower() == "ausruhen" and rested == 0:
