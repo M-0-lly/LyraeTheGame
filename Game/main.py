@@ -12,6 +12,7 @@ import time
 console.print("classes loaded", style="green")
 import story
 console.print("story loaded", style="green")
+from classes import *
 import classes
 console.print("classes loaded", style="green")
 print("")

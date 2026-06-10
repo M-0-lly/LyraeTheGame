@@ -81,12 +81,37 @@ class Player:
             self.hp += 10
             self.statchk()
             self.heal -= 1
-            console.print(f"{self.name} spürt, wie dessen Wunden heilen")
+            console.print(f"{self.name} spürt ein kitzeln auf der Haut, und der Schmerz ist weg.")
             console.print(f"+ 10hp", style = "green")
             return self.hp, self.heal
         else:
             print("Du hast keine Heiltränke mehr!")
             return self.hp
+
+    def sp_up(self):
+        if self.sp >= 0:
+            diff = self.maxsp - self.sp
+            self.sp = self.maxsp
+            self.statchk()
+            self.pwr -= 1
+            console.print(f"{self.name} fühlt sich, als würde man nie wieder Müde werden.")
+            console.print(f"+ {diff}sp", style = "green")
+            return self.sp
+        else:
+            print("Du hast keine Ausdauertränke mehr!")
+            return self.sp
+
+    def ma_up(self):
+        if self.ma >= 0:
+            self.ma += 20
+            self.statchk()
+            self.pot -= 1
+            console.print(f"{self.name} Gedanken beruhigen sich augenblicklig.")
+            console.print(f"+ 20ma", style = "green")
+            return self.ma
+        else:
+            print("Du hast keine Ausdauertränke mehr!")
+            return self.ma
 
     def use_item(self):
             ongoing = True
@@ -95,13 +120,21 @@ class Player:
                 console.print(f"|   Wähle das zunutzende Item:       |")
                 console.print(f"|       Heiltrank:      {self.heal}  |")
                 console.print(f"|       Ausdauertrank:  {self.pwr}   |")
-                console.print(f"|       Manatranktrank: {self.heal}  |")
+                console.print(f"|       Manatrank:      {self.pot}  |")
                 console.print(f"+------------------------------------+")
                 item = input(f"{self.name} trinkt einen... : ")
                 if item == "":
                     console.print("Wie bitte?", style = "red")
                 if item.lower() == "heiltrank":
                     self.healing()
+                    ongoing = False
+                    return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
+                elif item.lower() == "ausdauertrank":
+                    self.sp_up()
+                    ongoing = False
+                    return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
+                elif item.lower() == "manatrank":
+                    self.ma_up()
                     ongoing = False
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
                 else:
@@ -288,6 +321,47 @@ def fighting1(pl):
             else:
                 print("Tipp: Siehe Inhalt Klammern")
 
+def wanderer(pl):
+        console.print(f"+-------------------------+")
+        console.print(f"| Der wandelnde Alchemist |")
+        console.print(f"+-------------------------+")
+
+        console.print("Hallo, Reisender. Ich habe\neiniges dabei... Was brauchst du?", style="yellow")
+        console.print("")
+        console.print(f"+------------------------+")
+        console.print(f"| Heiltrank     (-10gld) |")
+        console.print(f"| Ausdauertrank (-10gld) |")
+        console.print(f"| Manatrank     (-20gld) |")
+        console.print(f"+------------------------+")
+        console.print(f" Dein Gold: {pl.gld}")
+        inprog = True
+        while inprog:
+            cho = input("")
+            if cho == "Heiltrank":
+                console.print("Gekauft: Heiltrank", style="blue")
+                console.print("")
+                console.print("Ich danke für deinen Einkauf...", style="yellow")
+                pl.heal += 1
+                pl.gld -= 10
+                return pl.heal, pl.gld
+            elif cho == "Ausdauertrank":
+                console.print("Gekauft: Ausdauertrank", style="yellow")
+                console.print("")
+                console.print("Ich danke für deinen Einkauf...", style="yellow")
+                pl.pwr += 1
+                pl.gld -= 10
+                return pl.pwr, pl.gld
+            elif cho == "Manatrank":
+                console.print("Gekauft: Manatrank", style="magenta")
+                console.print("")
+                console.print("Ich danke für deinen Einkauf...", style="yellow")
+                pl.pot += 1
+                pl.gld -= 20
+                return pl.pot, pl.gld
+            else:
+                console.print("Wie bitte?", style="red")
+                continue
+
 # Funktion zum Zug
 def action1(pl):
         rested = 0
@@ -306,7 +380,11 @@ def action1(pl):
             print("")
             if choi.lower() == "weiter":
                 act = 1
-                fighting1(pl)
+                rando = random.randint(1, 3)
+                if rando == 1 or 2:
+                    fighting1(pl)
+                elif rando == 3:
+                    wanderer(pl)
             elif choi.lower() == "stats":
                 pl.stats()
             elif choi.lower() == "ausruhen" and rested == 0:
@@ -319,4 +397,3 @@ def action1(pl):
             else:
                 console.print("Wie bitte?", style="red")
                 print("")
-                print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")

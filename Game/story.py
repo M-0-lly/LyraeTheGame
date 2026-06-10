@@ -50,3 +50,9 @@ def storyprologue(pl):
         console.print("Prolog", style="bold underline yellow")
         console.print(i)
         classes.action1(pl)
+        prog = 0
+        prog += 1
+        if prog == 2:
+            print("")
+            console.print("Im dichten Nebel erkennst du eine Sillhouette...")
+            print("")
