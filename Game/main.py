@@ -17,7 +17,6 @@ import classes
 console.print("classes loaded", style="green")
 print("")
 print("")
-
 #Titelcard
 console.print("Lyrae The Game", style="bold underline yellow")
 console.print("by Tom Steinbach", style="italic magenta")

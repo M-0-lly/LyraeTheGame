@@ -45,17 +45,19 @@ ein Schild erkennen: Morghorn.
 """)
 prologue = [prl1, prl2, prl3, prl4]
 
-wandererevent = 0
+
 def storyprologue(pl):
-    global wandererevent
     console.print(ttlcrd)
+    event = 0
+    eventchance = random.randint(1, 4)
     for i in prologue:
+        time.sleep(0.1)
         console.print("Prolog", style="bold underline yellow")
         console.print(i)
         classes.action1(pl)
-        wandererevent += 1
-        if wandererevent == 2:
-            print("")
-            console.print("Im dichten Nebel erkennst du eine Sillhouette...")
-            print("")
+        event += 1
+        if event == eventchance:
+            time.sleep(0.1)
+            console.print("Aus dem eisigen Nebel siehst du eine Sillhouette hervortreten...", style="blue")
+            time.sleep(0.1)
             wanderer(pl)

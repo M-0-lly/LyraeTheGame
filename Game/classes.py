@@ -234,10 +234,10 @@ def character():
             else:
                 console.print("Abgebrochen", style="red")
         elif char.lower() == "debug":
-            pl = Player(name="John", sname=" Lyrae", wpn="Fäuste", mag="Glock19", hp=int(input("HP: ")),
-                        maxhp= 9999999, sp=int(input("SP: ")),
-                        maxsp=9999999, ma=int(input("MANA: ")), maxma=9999999,
-                        gld=int(input("Gold: ")), magdam=int(input("Mag. Schaden: ")),
+            pl = Player(name="John", sname=" Lyrae", wpn="Fäuste", mag="Glock19", hp=9999999,
+                        maxhp= 9999999, sp=9999999,
+                        maxsp=9999999, ma=9999999, maxma=9999999,
+                        gld=9999999, magdam=9999999,
                         wpndam=int(input("Phy. Schaden: ")), heal = 999999, pwr = 999999, pot = 999999)
             pl.stats()
             confirm = str(input("Bestätigen? (y/n): "))
@@ -321,6 +321,8 @@ def fighting1(pl):
             else:
                 print("Tipp: Siehe Inhalt Klammern")
 
+
+
 def wanderer(pl):
         console.print(f"+-------------------------+")
         console.print(f"| Der wandelnde Alchemist |")
@@ -337,27 +339,84 @@ def wanderer(pl):
         inprog = True
         while inprog:
             cho = input("")
-            if cho == "Heiltrank":
+            if cho.lower() == "heiltrank" and pl.gld >= 10:
                 console.print("Gekauft: Heiltrank", style="blue")
                 console.print("")
                 console.print("Ich danke für deinen Einkauf...", style="yellow")
                 pl.heal += 1
                 pl.gld -= 10
-                return pl.heal, pl.gld
-            elif cho == "Ausdauertrank":
+                console.print("Brauchst du noch was?", style = "yellow")
+                again = input("(y/n)")
+                if again.lower() == "y":
+                    console.print("")
+                    console.print(f"+------------------------+")
+                    console.print(f"| Heiltrank     (-10gld) |")
+                    console.print(f"| Ausdauertrank (-10gld) |")
+                    console.print(f"| Manatrank     (-20gld) |")
+                    console.print(f"+------------------------+")
+                    console.print(f" Dein Gold: {pl.gld}")
+                    continue
+                elif again.lower() == "n":
+                    return pl.heal, pl.gld
+                else:
+                    console.print("Wie bitte?", style = "red")
+            elif cho.lower() == "heiltrank" and pl.gld < 10:
+                console.print("")
+                console.print("Wenn du nicht zahlen kannst, gehe ich...", style="yellow")
+                console.print("")
+                break
+            elif cho.lower() == "ausdauertrank" and pl.gld >= 10:
                 console.print("Gekauft: Ausdauertrank", style="yellow")
                 console.print("")
                 console.print("Ich danke für deinen Einkauf...", style="yellow")
                 pl.pwr += 1
                 pl.gld -= 10
-                return pl.pwr, pl.gld
-            elif cho == "Manatrank":
+                console.print("Brauchst du noch was?", style="yellow")
+                again = input("(y/n)")
+                if again.lower() == "y":
+                    console.print("")
+                    console.print(f"+------------------------+")
+                    console.print(f"| Heiltrank     (-10gld) |")
+                    console.print(f"| Ausdauertrank (-10gld) |")
+                    console.print(f"| Manatrank     (-20gld) |")
+                    console.print(f"+------------------------+")
+                    console.print(f" Dein Gold: {pl.gld}")
+                    continue
+                elif again.lower() == "n":
+                    return pl.pwr, pl.gld
+                else:
+                    console.print("Wie bitte?", style="red")
+            elif cho.lower() == "ausdauertrank" and pl.gld < 10:
+                console.print("")
+                console.print("Wenn du nicht zahlen kannst, gehe ich...", style="yellow")
+                console.print("")
+                break
+            elif cho.lower() == "manatrank" and pl.gld >= 20:
                 console.print("Gekauft: Manatrank", style="magenta")
                 console.print("")
                 console.print("Ich danke für deinen Einkauf...", style="yellow")
                 pl.pot += 1
                 pl.gld -= 20
-                return pl.pot, pl.gld
+                console.print("Brauchst du noch was?", style="yellow")
+                again = input("(y/n)")
+                if again.lower() == "y":
+                    console.print("")
+                    console.print(f"+------------------------+")
+                    console.print(f"| Heiltrank     (-10gld) |")
+                    console.print(f"| Ausdauertrank (-10gld) |")
+                    console.print(f"| Manatrank     (-20gld) |")
+                    console.print(f"+------------------------+")
+                    console.print(f" Dein Gold: {pl.gld}")
+                    continue
+                elif again.lower() == "n":
+                    return pl.pot, pl.gld
+                else:
+                    console.print("Wie bitte?", style="red")
+            elif cho.lower() == "manatrank" and pl.gld < 20:
+                console.print("")
+                console.print("Wenn du nicht zahlen kannst, gehe ich...", style="yellow")
+                console.print("")
+                break
             else:
                 console.print("Wie bitte?", style="red")
                 continue
@@ -380,6 +439,7 @@ def action1(pl):
             print("")
             if choi.lower() == "weiter":
                 fighting1(pl)
+                return pl
             elif choi.lower() == "stats":
                 pl.stats()
             elif choi.lower() == "ausruhen" and rested == 0:
