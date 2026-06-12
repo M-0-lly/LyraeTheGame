@@ -1,5 +1,3 @@
-from rich.console import Console
-from rich.markdown import Markdown
 import classes
 from classes import *
 console = Console()

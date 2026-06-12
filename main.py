@@ -5,10 +5,9 @@ Main-Datei des Spiels
 
 # Import
 from rich.console import Console
-from rich import print
+
 console = Console()
 console.print("rich loaded", style="green")
-import time
 console.print("classes loaded", style="green")
 import story
 console.print("story loaded", style="green")
