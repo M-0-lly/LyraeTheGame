@@ -44,24 +44,26 @@ class Player:
 
     # Methode zum Ausgeben der Spielerstats
     def stats(self):
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         print("")
-        console.print(f"Stats",style="underline")
+        console.print(        f"+-------------------------------------------------------------+")
+        console.print(f" Stats",style="bold")
         time.sleep(0.2)
-        console.print(        f"   Name:     {self.name}{self.sname}", style="bold")
+        console.print(f"   Name:     {self.name}{self.sname}                           ", style="bold")
         time.sleep(0.2)
-        console.print(        f"   Waffe:    {self.wpn} - {self.wpndam} physischer Schaden")
+        console.print(        f"   Waffe:    {self.wpn} - {self.wpndam} physischer Schaden     ")
         time.sleep(0.2)
-        console.print(        f"   Magie:    {self.mag} - {self.magdam} magischer Schaden")
+        console.print(        f"   Magie:    {self.mag} - {self.magdam} magischer Schaden      ")
         time.sleep(0.2)
-        console.print(        f"   Kraft:    {self.hp}hp")
+        console.print(        f"   Kraft:    {self.hp}hp                                       ")
         time.sleep(0.2)
-        console.print(        f"   Ausdauer: {self.sp}sp")
+        console.print(        f"   Ausdauer: {self.sp}sp                                       ")
         time.sleep(0.2)
-        console.print(        f"   Mana:     {self.ma}ma")
+        console.print(        f"   Mana:     {self.ma}ma                                       ")
         time.sleep(0.2)
-        console.print(        f"   Gold:     {self.gld}gld")
+        console.print(        f"   Gold:     {self.gld}gld                                     ")
         time.sleep(0.2)
+        console.print(f"+-------------------------------------------------------------+")
+        console.print(f" Tränke:", style = "bold")
         if self.heal <= 1:
             console.print(f"   Heiltränke:              {self.heal} Trank", style = "blue")
         elif self.heal > 1:
@@ -75,16 +77,20 @@ class Player:
             console.print(f"   Manatränke:              {self.pot} Trank", style="magenta")
         elif self.pot > 1:
             console.print(f"   Manatränke:              {self.pot} Tränke", style="magenta")
+        console.print(f"+-------------------------------------------------------------+")
+        print("")
 
     def healing(self):
         if self.heal > 0:
             self.hp += 10
             self.statchk()
             self.heal -= 1
+            time.sleep(0.2)
             console.print(f"{self.name} spürt ein kitzeln auf der Haut, und der Schmerz ist weg.")
             console.print(f"+ 10hp", style = "green")
             return self.hp, self.heal
         else:
+            time.sleep(0.2)
             print("Du hast keine Heiltränke mehr!")
             return self.hp
 
@@ -94,10 +100,12 @@ class Player:
             self.sp = self.maxsp
             self.statchk()
             self.pwr -= 1
+            time.sleep(0.2)
             console.print(f"{self.name} fühlt sich, als würde man nie wieder Müde werden.")
             console.print(f"+ {diff}sp", style = "green")
             return self.sp
         else:
+            time.sleep(0.2)
             print("Du hast keine Ausdauertränke mehr!")
             return self.sp
 
@@ -106,43 +114,47 @@ class Player:
             self.ma += 20
             self.statchk()
             self.pot -= 1
+            time.sleep(0.2)
             console.print(f"{self.name} Gedanken beruhigen sich augenblicklig.")
             console.print(f"+ 20ma", style = "green")
             return self.ma
         else:
+            time.sleep(0.2)
             print("Du hast keine Ausdauertränke mehr!")
             return self.ma
 
     def use_item(self):
             ongoing = True
             while ongoing:
+                time.sleep(0.2)
                 console.print(f"+------------------------------------+")
-                console.print(f"|   Wähle das zunutzende Item:       |")
-                console.print(f"|       Heiltrank:      {self.heal}  |")
-                console.print(f"|       Ausdauertrank:  {self.pwr}   |")
-                console.print(f"|       Manatrank:      {self.pot}  |")
+                console.print(f"   Wähle das zunutzende Item:       ")
+                console.print(f"        Heiltrank:      {self.heal}  ")
+                console.print(f"        Ausdauertrank:  {self.pwr}   ")
+                console.print(f"        Manatrank:      {self.pot}   ")
                 console.print(f"+------------------------------------+")
                 item = input(f"{self.name} trinkt einen... : ")
                 if item == "":
+                    time.sleep(0.2)
                     console.print("Wie bitte?", style = "red")
                 if item.lower() == "heiltrank":
+                    time.sleep(0.2)
                     self.healing()
                     ongoing = False
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
                 elif item.lower() == "ausdauertrank":
+                    time.sleep(0.2)
                     self.sp_up()
                     ongoing = False
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
                 elif item.lower() == "manatrank":
+                    time.sleep(0.2)
                     self.ma_up()
                     ongoing = False
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
                 else:
+                    time.sleep(0.2)
                     console.print("Wie bitte?", style="red")
-
-    time.sleep(0.2)
-    print("")
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
     # Methode zum Ausruhen (Nur einmal pro Zug einsetzbar)
     def rest(self):
@@ -168,38 +180,36 @@ class Enemy:
 
     # Methode zum Ausgeben der Gegnerstats
     def enstats(self):
-        console.print(f"Enemy Stats",style="underline")
+        console.print(        f"+-----------------------------------+")
+        console.print(f" Enemy Stats",style="underline")
         time.sleep(0.2)
-        console.print(        f"   Name:     {self.enname}", style="bold")
+        console.print(f"   Name:     {self.enname}", style="bold")
         time.sleep(0.2)
         console.print(        f"   Kraft:    {self.enhp}hp")
         time.sleep(0.2)
-        console.print(f"   Schaden:    {self.endam} Schaden")
+        console.print(        f"   Schaden:    {self.endam} Schaden")
+        console.print(        f"+-----------------------------------+")
         print("")
-        print("~~~~~~~~~~~~~~")
 
 
 # Funktion zur Charakterwahl
 def character():
-    chch = Markdown("""~~~
-    Wie ist dein Name? 
-
-        - Hivor
-        - Said
-        - Tilara
-        - Khazo
-    
-    """)
+    chch = Markdown("""
+    +----------------------+
+    | Wie ist dein Name?   |
+    |    - Hivor           |
+    |    - Said            |
+    |    - Tilara          |
+    |    - Khazo           |
+    +----------------------+""")
     console.print(chch)
     chara = 0
     while chara == 0:
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         char = input("")
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         print("")
         if char.lower() == "hivor":
             pl = Player(name="Hivor", sname=" von Donarstad", wpn="Claymore", mag="Blitze", hp=30, maxhp=30, sp=15,
-                        maxsp=15, ma=5, maxma=5, gld=50, magdam=1000, wpndam=15, heal = 3, pwr = 1, pot = 0)
+                        maxsp=15, ma=5, maxma=5, gld=50, magdam=1000, wpndam=15, heal = 1, pwr = 0, pot = 0)
             pl.stats()
             confirm = str(input("Bestätigen? (y/n): "))
             if confirm.lower() == "y":
@@ -208,7 +218,7 @@ def character():
                 console.print("Abgebrochen", style="red")
         elif char.lower() == "said":
             pl = Player(name="Said", sname=" Nahti", wpn="Bernstein-Zepter", mag="Wasser", hp=25, maxhp=25, sp=25,
-                        maxsp=25, ma=30, maxma=30, gld=20, magdam=20, wpndam=5, heal = 3, pwr = 1, pot = 0)
+                        maxsp=25, ma=30, maxma=30, gld=20, magdam=20, wpndam=5, heal = 4, pwr = 3, pot = 3)
             pl.stats()
             confirm = str(input("Bestätigen? (y/n): "))
             if confirm.lower() == "y":
@@ -217,7 +227,7 @@ def character():
                 console.print("Abgebrochen", style="red")
         elif char.lower() == "khazo":
             pl = Player(name="Khazo", sname=" Khan", wpn="2 Kiliçlar", mag="Feuer", hp=30, maxhp=30, sp=30,
-                        maxsp=30, ma=15, maxma=15, gld=0, magdam=40, wpndam=20, heal = 3, pwr = 1, pot = 0)
+                        maxsp=30, ma=15, maxma=15, gld=0, magdam=40, wpndam=20, heal = 0, pwr = 0, pot = 0)
             pl.stats()
             confirm = input("Bestätigen? (y/n): ")
             if confirm.lower() == "y":
@@ -226,7 +236,7 @@ def character():
                 console.print("Abgebrochen", style="red")
         elif char.lower() == "tilara":
             pl = Player(name="Tilara", sname="", wpn="Streitkolben", mag="Erdebeben", hp=25, maxhp=25, sp=40,
-                        maxsp=40, ma=10, maxma=10, gld=40, magdam=30, wpndam=20, heal = 3, pwr = 1, pot = 0)
+                        maxsp=40, ma=10, maxma=10, gld=40, magdam=30, wpndam=20, heal = 2, pwr = 2, pot = 2)
             pl.stats()
             confirm = str(input("Bestätigen? (y/n): "))
             if confirm.lower() == "y":
@@ -264,6 +274,7 @@ def get_enemy1():
 # Funktion Kampfsystem
 def fighting1(pl):
     enemy = get_enemy1()
+    print(f"Ein {enemy.enname} attackiert dich!")
     finished = 0
     while finished == 0:
         if enemy.enhp <= 0:
@@ -271,11 +282,10 @@ def fighting1(pl):
             console.print("Besiegt!", style="yellow")
             pl.gld += enemy.engld
             time.sleep(0.2)
-            console.print(f"Du hast {enemy.engld}gld gefunden! Du hast nun {pl.gld}gld")
             print("")
-            print("~~~~~~~~~~~~~~")
+            console.print(f"Du hast {enemy.engld}gld gefunden! Du hast nun {pl.gld}gld", style = "yellow")
+            print("")
             return pl
-        print(f"Ein {enemy.enname} attackiert dich!")
         time.sleep(0.2)
         pl.hp -= enemy.endam
         console.print(f"{enemy.endam} Schaden genommen", style="red")
@@ -289,17 +299,15 @@ def fighting1(pl):
             return exit()
         enemy.enstats()
         while reacted == 0:
-            CHOICE = f"""
+            CHOICE = f"""  +---------------------------------------------+
                             Wie wehrst du dich?
-                                - {pl.wpn} (Phy) - 5sp
-                                - {pl.mag} (Mag) - 5ma
-                                - item
-                            """
+                                - Phy: {pl.wpn} Schaden, -5sp
+                                - Mag: {pl.mag} Schaden, -5ma
+                                - Item
+                           +---------------------------------------------+ """
             chc = Markdown(CHOICE)
-            print("~~~~~~~~~~~~~~")
             print(chc)
-            print("~~~~~~~~~~~~~~")
-            answer = input()
+            answer = input("(Phy/Mag): ")
             print("")
             if answer.lower() == "phy" and pl.sp >= 1:
                 enemy.enhp -= pl.wpndam
@@ -426,15 +434,16 @@ def action1(pl):
         rested = 0
         act = 0
         while act == 0:
-            console.print("Was möchtest du tun?", style="yellow")
+            print(                "+----------------------------------+")
+            console.print(" Was möchtest du tun?", style="yellow")
             console.print(        "   - Weiter (Weitergehen)")
             time.sleep(0.2)
-            console.print("   - Ausruhen (+5sp, +1ma)")
+            console.print(        "   - Ausruhen (+5 hp, +5sp, +1ma)")
             time.sleep(0.2)
-            console.print("   - Stats (Zeigt Stats)")
+            console.print(        "   - Stats (Zeigt Stats)")
             time.sleep(0.2)
-            console.print("   - Suizid (Beendet das Spiel)")
-            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            console.print(        "   - Suizid (Beendet das Spiel)")
+            print(                "+----------------------------------+")
             choi = input()
             print("")
             if choi.lower() == "weiter":

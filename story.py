@@ -11,36 +11,28 @@ ttlcrd = Markdown("""
 """)
 
 
-prl1 = Markdown("""
-~~~
-Du bewegst dich durch die eisigen Weiten
-des großen Grallbag-Gebirges, auf der Spitze Lyraes. 
-In sehnsucht nach Wärme suchst du schon seit einem Tag
-nach einen Unterschlupf.
-Was sollst du nur tun?
-~~~ 
-""")
+prl1 = ("""+--------------------------------------------------------+
+| Du bewegst dich durch die eisigen Weiten               |
+| des großen Grallbag-Gebirges, auf der Spitze Lyraes.   |
+| In sehnsucht nach Wärme suchst du schon seit einem Tag |
+| nach einen Unterschlupf.                               |
+| Was sollst du nur tun?                                 |
++--------------------------------------------------------+\n""")
 
-prl2 = Markdown("""
-~~~
-Hinter einer dichten Winddecke kannst du Licht in der 
-Ferne erkennen. Du bekommst Hoffnung auf Obdach.
-~~~
-""")
+prl2 = ("""+-------------------------------------------------------+\n
+| Hinter einer dichten Winddecke kannst du Licht in der |\n
+| Ferne erkennen. Du bekommst Hoffnung auf Obdach.      |\n
++-------------------------------------------------------+\n""")
 
-prl3 = Markdown(f"""
-~~~
-Die Lichter werden dir immer näher. Ist es ein Dorf? Ein Lager?
-Ein Feuer scheint es zumindest zu geben.
-~~~
-""")
+prl3 = (f"""+-----------------------------------------------------------------+\n
+| Die Lichter werden dir immer näher. Ist es ein Dorf? Ein Lager? |\n
+| Ein Feuer scheint es zumindest zu geben.                        |\n
++-----------------------------------------------------------------+\n""")
 
-prl4 = Markdown("""
-~~~
-Es ist ein Dorf! Entlang eines verschneiten Weges konntest du
-ein Schild erkennen: Morghorn.
-~~~
-""")
+prl4 = ("""+-----------------------------------------------------------------+\n
+| Es ist ein Dorf! Entlang eines verschneiten Weges konntest du   |\n
+| ein Schild erkennen: Morghorn.                                  |\n
++-----------------------------------------------------------------+\n""")
 prologue = [prl1, prl2, prl3, prl4]
 
 
