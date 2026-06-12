@@ -299,13 +299,7 @@ def fighting1(pl):
             return exit()
         enemy.enstats()
         while reacted == 0:
-            CHOICE = f"""  +---------------------------------------------+
-                            Wie wehrst du dich?
-                                - Phy: {pl.wpn} Schaden, -5sp
-                                - Mag: {pl.mag} Schaden, -5ma
-                                - Item
-                           +---------------------------------------------+ """
-            chc = Markdown(CHOICE)
+            chc = f"""+---------------------------------------------+\n Wie wehrst du dich?\n  - Phy: {pl.wpn} Schaden, -5sp\n  - Mag: {pl.mag} Schaden, -5ma\n  - Item\n+---------------------------------------------+\n"""
             print(chc)
             answer = input("(Phy/Mag): ")
             print("")

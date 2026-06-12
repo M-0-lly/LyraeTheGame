@@ -19,19 +19,19 @@ prl1 = ("""+--------------------------------------------------------+
 | Was sollst du nur tun?                                 |
 +--------------------------------------------------------+\n""")
 
-prl2 = ("""+-------------------------------------------------------+\n
-| Hinter einer dichten Winddecke kannst du Licht in der |\n
-| Ferne erkennen. Du bekommst Hoffnung auf Obdach.      |\n
+prl2 = ("""+-------------------------------------------------------+
+| Hinter einer dichten Winddecke kannst du Licht in der |
+| Ferne erkennen. Du bekommst Hoffnung auf Obdach.      |
 +-------------------------------------------------------+\n""")
 
-prl3 = (f"""+-----------------------------------------------------------------+\n
-| Die Lichter werden dir immer näher. Ist es ein Dorf? Ein Lager? |\n
-| Ein Feuer scheint es zumindest zu geben.                        |\n
+prl3 = (f"""+-----------------------------------------------------------------+
+| Die Lichter werden dir immer näher. Ist es ein Dorf? Ein Lager? |
+| Ein Feuer scheint es zumindest zu geben.                        |
 +-----------------------------------------------------------------+\n""")
 
-prl4 = ("""+-----------------------------------------------------------------+\n
-| Es ist ein Dorf! Entlang eines verschneiten Weges konntest du   |\n
-| ein Schild erkennen: Morghorn.                                  |\n
+prl4 = ("""+-----------------------------------------------------------------+
+| Es ist ein Dorf! Entlang eines verschneiten Weges konntest du   |
+| ein Schild erkennen: Morghorn.                                  |
 +-----------------------------------------------------------------+\n""")
 prologue = [prl1, prl2, prl3, prl4]
 
