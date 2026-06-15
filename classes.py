@@ -86,7 +86,8 @@ class Player:
             self.statchk()
             self.heal -= 1
             time.sleep(0.2)
-            console.print(f"{self.name} spürt ein kitzeln auf der Haut, und der Schmerz ist weg.")
+            console.print(f"{self.name}s Haut kitzelt, und alle Schmerzen sind verschwunden")
+            time.sleep(0.2)
             console.print(f"+ 10hp", style = "green")
             return self.hp, self.heal
         else:
@@ -101,7 +102,8 @@ class Player:
             self.statchk()
             self.pwr -= 1
             time.sleep(0.2)
-            console.print(f"{self.name} fühlt sich, als würde man nie wieder Müde werden.")
+            console.print(f"{self.name}s Herz pocht wie im Wahn!")
+            time.sleep(0.2)
             console.print(f"+ {diff}sp", style = "green")
             return self.sp
         else:
@@ -115,7 +117,8 @@ class Player:
             self.statchk()
             self.pot -= 1
             time.sleep(0.2)
-            console.print(f"{self.name} Gedanken beruhigen sich augenblicklig.")
+            console.print(f"{self.name} konnte noch nie so klar denken.")
+            time.sleep(0.2)
             console.print(f"+ 20ma", style = "green")
             return self.ma
         else:
