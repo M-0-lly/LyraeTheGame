@@ -326,6 +326,10 @@ def fighting1(pl):
 
 
 def wanderer(pl):
+        time.sleep(0.1)
+        console.print("Aus dem eisigen Nebel tritt eine Sillhouette hervor...", style="blue")
+        print("")
+        time.sleep(0.1)
         console.print(f"+-------------------------+")
         console.print(f"| Der wandelnde Alchemist |")
         console.print(f"+-------------------------+")

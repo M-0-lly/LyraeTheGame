@@ -47,7 +47,4 @@ def storyprologue(pl):
         classes.action1(pl)
         event += 1
         if event == eventchance:
-            time.sleep(0.1)
-            console.print("Aus dem eisigen Nebel siehst du eine Sillhouette hervortreten...", style="blue")
-            time.sleep(0.1)
             wanderer(pl)
