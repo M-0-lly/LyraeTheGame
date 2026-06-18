@@ -141,18 +141,28 @@ class Player:
                     time.sleep(0.2)
                     console.print("Wie bitte?", style = "red")
                     continue
-                if item.lower() == "heiltrank":
+                elif item.lower() == "heiltrank" and self.heal > 0:
                     time.sleep(0.2)
                     self.healing()
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
-                elif item.lower() == "ausdauertrank":
+                elif item.lower() == "heiltrank" and self.heal <= 0:
+                    time.sleep(0.2)
+                    console.print("Du hast keine Heiltränke mehr", style = "red")
+                    return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
+                elif item.lower() == "ausdauertrank" and self.pwr > 0:
                     time.sleep(0.2)
                     self.sp_up()
+                elif item.lower() == "ausdauertrank" and self.pwr <= 0:
+                    time.sleep(0.2)
+                    console.print("Du hast keine Ausdauertränke mehr", style = "red")
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
-                elif item.lower() == "manatrank":
+                elif item.lower() == "manatrank" and self.pot > 0:
                     time.sleep(0.2)
                     self.ma_up()
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
+                elif item.lower() == "manatrank" and self.pot <= 0:
+                    time.sleep(0.2)
+                    console.print("Du hast keine Manatränke mehr!", style = "red")
                 else:
                     time.sleep(0.2)
                     console.print("Wie bitte?", style="red")
@@ -269,7 +279,7 @@ def character():
 def get_enemy1():
         en = random.randint(1, 3)
         if en == 1:
-            enemy = Enemy(enname="Bandit", enhp=20, endam=random.randint(5, 8), engld=random.randint(10, 20))
+            enemy = Enemy(enname="Elch", enhp=20, endam=random.randint(5, 8), engld=random.randint(15, 30))
             return enemy
         elif en == 2 or 3:
             enemy = Enemy(enname="Perlschwein", enhp=10, endam=random.randint(7, 8), engld=random.randint(10, 20))
@@ -316,7 +326,7 @@ def fighting1(pl):
                 reacted = 1
             elif answer.lower() == "phy" and pl.sp <= 0:
                 print("")
-                print("Du hast keine Ausdauer und dein Angriff richtet keinerlei Schaden an")
+                print("Du hast keine Ausdauer und dein Angriff richtet keinerlei Schaden an!")
             elif answer.lower() == "mag" and pl.ma >= 1:
                 enemy.enhp -= pl.magdam
                 pl.ma -= 5
@@ -464,7 +474,7 @@ def prologue_boss(pl):
     while finished == 0:
         if enemy.enhp <= 0:
             time.sleep(0.2)
-            console.print("Besiegt!", style="yellow")
+            console.print("Das mächtige Wollrus fällt zu Boden, tot!", style="yellow")
             pl.gld += enemy.engld
             time.sleep(0.2)
             print("")

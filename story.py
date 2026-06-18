@@ -11,7 +11,7 @@ prl1 = ("""+--------------------------------------------------------+
 | Du bewegst dich durch die eisigen Weiten               |
 | des großen Grallbag-Gebirges, auf der Spitze Lyraes.   |
 | In sehnsucht nach Wärme suchst du schon seit einem Tag |
-| nach einen Unterschlupf.                               |
+| nach einem Unterschlupf.                               |
 | Außer weiterzugehen, bleiben dir nicht viele Optionen. |
 +--------------------------------------------------------+\n""")
 
@@ -20,8 +20,8 @@ prl2 = ("""+--------------------------------------------------------+
 | einer Weisung: "Morghorn".                             |
 | Der Frost auf deinem Körper treibt dich an,            |
 | die Richtung einzuschlagen. Die Reflexion der Sonne im |
-| brennt in deinen Augen, während du versuchst den Weg   |
-| im Schnee zu finden.                                   |
+| Schnee brennt in deinen Augen, während du versuchst    |
+| den Weg im Schnee zu finden.                           |
 +--------------------------------------------------------+\n""")
 
 prl3 = (f"""+--------------------------------------------------------+
@@ -31,13 +31,12 @@ prl3 = (f"""+--------------------------------------------------------+
 | immerhin der Protagonist!                              |
 +--------------------------------------------------------+\n""")
 
-prl4 = ("""
-+--------------------------------------------------------+
+prl4 = ("""+--------------------------------------------------------+
 | Morghorn ist nicht mehr weit, dennoch hast du ein      |
 | unwohles Gefühl, als würde bald etwas passieren.       |
 | Du bleibst fest auf Grund und Stelle stehen, um dich   |
 | umzusehen, aber: nichts.                               |
-| Vor dir siehst du nur einen Hügel.  
+| Vor dir siehst du nur einen Hügel.                     |  
 +--------------------------------------------------------+\n""")
 prologue = [prl1, prl2, prl3, prl4]
 
