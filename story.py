@@ -31,8 +31,13 @@ prl3 = (f"""+--------------------------------------------------------+
 | immerhin der Protagonist!                              |
 +--------------------------------------------------------+\n""")
 
-prl4 = ("""+--------------------------------------------------------+
-|                              
+prl4 = ("""
++--------------------------------------------------------+
+| Morghorn ist nicht mehr weit, dennoch hast du ein      |
+| unwohles Gefühl, als würde bald etwas passieren.       |
+| Du bleibst fest auf Grund und Stelle stehen, um dich   |
+| umzusehen, aber: nichts.                               |
+| Vor dir siehst du nur einen Hügel.  
 +--------------------------------------------------------+\n""")
 prologue = [prl1, prl2, prl3, prl4]
 
@@ -49,3 +54,4 @@ def storyprologue(pl):
         event += 1
         if event == eventchance:
             wanderer(pl)
+    prologue_boss(pl)

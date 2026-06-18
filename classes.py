@@ -140,24 +140,24 @@ class Player:
                 if item == "":
                     time.sleep(0.2)
                     console.print("Wie bitte?", style = "red")
+                    continue
                 if item.lower() == "heiltrank":
                     time.sleep(0.2)
                     self.healing()
-                    ongoing = False
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
                 elif item.lower() == "ausdauertrank":
                     time.sleep(0.2)
                     self.sp_up()
-                    ongoing = False
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
                 elif item.lower() == "manatrank":
                     time.sleep(0.2)
                     self.ma_up()
-                    ongoing = False
                     return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
                 else:
                     time.sleep(0.2)
                     console.print("Wie bitte?", style="red")
+                    continue
+            return self.heal, self.pwr, self.pot, self.hp, self.sp, self.ma
 
     # Methode zum Ausruhen (Nur einmal pro Zug einsetzbar)
     def rest(self):
@@ -251,7 +251,7 @@ def character():
                         maxhp= 9999999, sp=9999999,
                         maxsp=9999999, ma=9999999, maxma=9999999,
                         gld=9999999, magdam=9999999,
-                        wpndam=int(input("Phy. Schaden: ")), heal = 999999, pwr = 999999, pot = 999999)
+                        wpndam=999999, heal = 999999, pwr = 999999, pot = 999999)
             pl.stats()
             confirm = str(input("Bestätigen? (y/n): "))
             if confirm.lower() == "y":
@@ -263,6 +263,7 @@ def character():
             print("")
             console.print(chch)
             continue
+    return "Fehler: Charakterwahl fehlgeschlagen"
 
 # Funktion zum Generieren eines Gegners
 def get_enemy1():
@@ -273,6 +274,7 @@ def get_enemy1():
         elif en == 2 or 3:
             enemy = Enemy(enname="Perlschwein", enhp=10, endam=random.randint(7, 8), engld=random.randint(1, 2))
             return enemy
+        return "Fehler: Kein enemy gefunden"
 
 # Funktion Kampfsystem
 def fighting1(pl):
@@ -325,6 +327,7 @@ def fighting1(pl):
                 pl.use_item()
             else:
                 print("Tipp: Siehe Inhalt Klammern")
+    return "Fehler: Kampfsystem versagt"
 
 
 
@@ -338,32 +341,25 @@ def wanderer(pl):
         console.print(f"+-------------------------+")
 
         console.print("Hallo, Reisender. Ich habe\neiniges dabei... Was brauchst du?", style="yellow")
-        console.print("")
-        console.print(f"+------------------------+")
-        console.print(f"| Heiltrank     (-10gld) |")
-        console.print(f"| Ausdauertrank (-10gld) |")
-        console.print(f"| Manatrank     (-20gld) |")
-        console.print(f"+------------------------+")
-        console.print(f" Dein Gold: {pl.gld}")
         inprog = True
         while inprog:
+            console.print("")
+            console.print(f"+------------------------+")
+            console.print(f"| Heiltrank     (-10gld) |")
+            console.print(f"| Ausdauertrank (-10gld) |")
+            console.print(f"| Manatrank     (-20gld) |")
+            console.print(f"+------------------------+")
+            console.print(f" Dein Gold: {pl.gld}")
             cho = input("")
             if cho.lower() == "heiltrank" and pl.gld >= 10:
                 console.print("Gekauft: Heiltrank", style="blue")
-                console.print("")
+                print("")
                 console.print("Ich danke für deinen Einkauf...", style="yellow")
                 pl.heal += 1
                 pl.gld -= 10
                 console.print("Brauchst du noch was?", style = "yellow")
                 again = input("(y/n)")
                 if again.lower() == "y":
-                    console.print("")
-                    console.print(f"+------------------------+")
-                    console.print(f"| Heiltrank     (-10gld) |")
-                    console.print(f"| Ausdauertrank (-10gld) |")
-                    console.print(f"| Manatrank     (-20gld) |")
-                    console.print(f"+------------------------+")
-                    console.print(f" Dein Gold: {pl.gld}")
                     continue
                 elif again.lower() == "n":
                     return pl.heal, pl.gld
@@ -383,13 +379,6 @@ def wanderer(pl):
                 console.print("Brauchst du noch was?", style="yellow")
                 again = input("(y/n)")
                 if again.lower() == "y":
-                    console.print("")
-                    console.print(f"+------------------------+")
-                    console.print(f"| Heiltrank     (-10gld) |")
-                    console.print(f"| Ausdauertrank (-10gld) |")
-                    console.print(f"| Manatrank     (-20gld) |")
-                    console.print(f"+------------------------+")
-                    console.print(f" Dein Gold: {pl.gld}")
                     continue
                 elif again.lower() == "n":
                     return pl.pwr, pl.gld
@@ -409,13 +398,6 @@ def wanderer(pl):
                 console.print("Brauchst du noch was?", style="yellow")
                 again = input("(y/n)")
                 if again.lower() == "y":
-                    console.print("")
-                    console.print(f"+------------------------+")
-                    console.print(f"| Heiltrank     (-10gld) |")
-                    console.print(f"| Ausdauertrank (-10gld) |")
-                    console.print(f"| Manatrank     (-20gld) |")
-                    console.print(f"+------------------------+")
-                    console.print(f" Dein Gold: {pl.gld}")
                     continue
                 elif again.lower() == "n":
                     return pl.pot, pl.gld
@@ -429,6 +411,7 @@ def wanderer(pl):
             else:
                 console.print("Wie bitte?", style="red")
                 continue
+        return "Fehler: Handel fehlgeschlagen"
 
 # Funktion zum Zug
 def action1(pl):
@@ -462,3 +445,66 @@ def action1(pl):
             else:
                 console.print("Wie bitte?", style="red")
                 print("")
+        return "Fehler: Action fehlgeschlagen"
+
+def prologue_boss(pl):
+    enemy = Enemy(enname = "Wollrus", enhp = 60, endam = 15, engld = 75)
+    console.print("""+--------------------------------------------------------+
+| Als du an dem Hügel vorbeigehen wolltest, bebte auf    |
+| Plötzlich die Erde, der Schnee teilte sich und über    |
+| dich erhebte sich ein mächtiges Wollrus.               |
+| Das prächtige Männchen schnaubt immerwieder in einem   |
+| tiefen Graueln, es schüttelt seinen dicken Pelz, um    |
+| um dir zu zeigen, dass es sich gar nicht freut dich    |
+| zu sehen.                                              |
++--------------------------------------------------------+\n""")
+    print("")
+    print(f"Das große {enemy.enname} attackiert dich!")
+    finished = 0
+    while finished == 0:
+        if enemy.enhp <= 0:
+            time.sleep(0.2)
+            console.print("Besiegt!", style="yellow")
+            pl.gld += enemy.engld
+            time.sleep(0.2)
+            print("")
+            console.print(f"Du hast {enemy.engld}gld gefunden! Du hast nun {pl.gld}gld", style = "yellow")
+            print("")
+            return pl
+        time.sleep(0.2)
+        pl.hp -= enemy.endam
+        console.print(f"{enemy.endam} Schaden genommen", style="red")
+        time.sleep(0.2)
+        print("")
+        pl.stats()
+        reacted = 0
+        if pl.hp <= 0:
+            console.print("Gestorben", style="red")
+            input()
+            return exit()
+        enemy.enstats()
+        while reacted == 0:
+            chc = f"""+---------------------------------------------+\n Wie wehrst du dich?\n  - Phy: {pl.wpn} Schaden, -5sp\n  - Mag: {pl.mag} Schaden, -5ma\n  - Item\n+---------------------------------------------+\n"""
+            print(chc)
+            answer = input("(Phy/Mag): ")
+            print("")
+            if answer.lower() == "phy" and pl.sp >= 1:
+                enemy.enhp -= pl.wpndam
+                pl.sp -= 5
+                console.print(f"Du hast {pl.wpndam} Schaden gemacht!", style="green")
+                print("")
+                reacted = 1
+            elif answer.lower() == "phy" and pl.sp <= 0:
+                print("")
+                print("Du hast keine Ausdauer und dein Angriff richtet keinerlei Schaden an")
+            elif answer.lower() == "mag" and pl.ma >= 1:
+                enemy.enhp -= pl.magdam
+                pl.ma -= 5
+                console.print(f"Du hast {pl.magdam} Schaden gemacht!", style="green")
+                print("")
+                reacted = 1
+            elif answer.lower() == "item":
+                pl.use_item()
+            else:
+                console.print("Wie bitte?", style="red")
+    return "Fehler: Kampfsystem versagt"

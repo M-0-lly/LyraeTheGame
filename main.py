@@ -1,8 +1,3 @@
-
-'''
-Main-Datei des Spiels
-'''
-
 # Import
 from rich.console import Console
 console = Console()
