@@ -269,10 +269,10 @@ def character():
 def get_enemy1():
         en = random.randint(1, 3)
         if en == 1:
-            enemy = Enemy(enname="Bandit", enhp=20, endam=random.randint(5, 8), engld=random.randint(5, 10))
+            enemy = Enemy(enname="Bandit", enhp=20, endam=random.randint(5, 8), engld=random.randint(10, 20))
             return enemy
         elif en == 2 or 3:
-            enemy = Enemy(enname="Perlschwein", enhp=10, endam=random.randint(7, 8), engld=random.randint(1, 2))
+            enemy = Enemy(enname="Perlschwein", enhp=10, endam=random.randint(7, 8), engld=random.randint(10, 20))
             return enemy
         return "Fehler: Kein enemy gefunden"
 
